@@ -17,9 +17,11 @@
     <script src="js/uikit.js"></script>
     <script src="js/uikit-icons.js"></script>
 </head>
-<body>
+<body class="uk-background-secondary">
 <?php include 'header.php'; ?>
-
+	<div class="uk-container uk-border-rounded uk-width-1-2 uk-background-muted">
+		<img class="uk-icon-image uk-border-circle">
+	</div>
 
 <?php include 'footer.php'; ?>
 </body>
