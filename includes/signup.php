@@ -1,6 +1,5 @@
 <?php 
 if (isset($_POST[Submit])) {
-	
 	require 'databaseinfo.php'; #remember this file has to be modified if you are trying to use a diferent database
 	$name=$_POST["Name"];
 	$userName=$_POST["UserName"];
@@ -32,19 +31,18 @@ if (isset($_POST[Submit])) {
 		exit();
 	}else{
 
-		#now here it'll check if the name already exists
-		$sql = "SELECT USERNAME FROM users WHERE USERNAME=?";
+		$sql = "SELECT USERNAME FROM users WHERE USERNAME=?;";
 		$stmt = mysqli_stmt_init($conn);
 
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
-			#error in case it can't read the database
-			header("Location: ../register.php?error=sqlerror101");
+			# code...
+			header("Location: ../index.php?error=sqlerror101");
 			exit();
+
 		}else{
 			/*
 			these will make sure if somebody already has the same username by verifying if the database has it, it'll have a result (that's the one in stmt), and it'll be 0 or 1
 			If the result is 1 then it'll throw an error and if its 0 it'll go on and if it's something else Imma shot maself*/
-
 			mysqli_stmt_bind_param($stmt, "s", $userName);
 			mysqli_stmt_execute($stmt);
 			mysqli_stmt_store_result($stmt);
@@ -56,33 +54,60 @@ if (isset($_POST[Submit])) {
 				header("Location: ../register.php?error=usernametaken");
 				exit();
 
-			}else{
 
-				$sql = "INSERT INTO users (NAME, USERNAME, EMAIL, PASS) VALUES (?, ?, ?, ?);";
-				$stmt = mysqli_stmt_init($conn);
+					# code...
+				
+
+			}else{
+				#and last this will check if the email is already registered and tell the user that they are already registered in the page
+				$sql = "SELECT EMAIL FROM users WHERE EMAIL=?;";
+				$stmt = mysqli_stmt_init($conn); 
 
 				if (!mysqli_stmt_prepare($stmt, $sql)) {
-					#error in case it can't write in the database
-					header("Location: ../register.php?error=sqlerror202");
+				# code...
+				header("Location: ../index.php?error=sqlerror101");
+				exit();
+
+			}else{
+				#this will do the same as the one above but this time it'll check for the email
+				mysqli_stmt_bind_param($stmt, "s", $email);
+				mysqli_stmt_execute($stmt);
+				mysqli_stmt_store_result($stmt);
+				$resultCheck = mysqli_stmt_num_rows($stmt);
+				#remember to always close the statements ALWAYS
+				mysqli_stmt_close($stmt);
+				if ($resultCheck > 0) {
+				
+					header("Location: ../register.php?error=youarealeadyregistered");
 					exit();
+
+
+						# code...
+				
+
 				}else{
-						#always encript ur password
-						#now this is the last part if everything was correct it'll hash the password and write everything in the database
-						$hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-			        	mysqli_stmt_bind_param($stmt, "ssss", $name, $userName, $email, $hashedPwd);
-			        	mysqli_stmt_execute($stmt);
-			        	header("Location: ../register.php?signup=success");
-			        	exit();
+
+					$sql = "INSERT INTO users (NAME, USERNAME, EMAIL, PASS) VALUES (?, ?, ?, ?);";
+					$stmt = mysqli_stmt_init($conn);
+
+					if (!mysqli_stmt_prepare($stmt, $sql)) {
+						#error in case it can't write in the database
+						header("Location: ../register.php?error=sqlerror202");
+						exit();
+					}else{
+							#always encript ur password
+							#now this is the last part if everything was correct it'll hash the password and write everything in the database
+							$hashedPwd = password_hash($password, PASSWORD_DEFAULT);
+				        	mysqli_stmt_bind_param($stmt, "ssss", $name, $userName, $email, $hashedPwd);
+				        	mysqli_stmt_execute($stmt);
+				        	header("Location: ../register.php?signup=success");
+				        	exit();
+						}
+					}
 				}
 			}
-		}
+		}	
+		mysqli_stmt_close($stmt);
+  		mysqli_close($conn);
 	}
-
-	mysqli_stmt_close($stmt);
-  	mysqli_close($conn);
-}
-
-else{
-
-	echo "begone thot";
 }
