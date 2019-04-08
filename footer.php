@@ -13,14 +13,14 @@
             <li><a href="#">Lorem Ipsum</a></li>
         </ul>
         </div>
-        <div class="uk-overflow-auto">
+        <address class="uk-overflow-auto">
             <ul>
                 <h1 class="uk-text-large">Contact</h1>
-                <li>email: antoniojoseqp@hotmail.com</li>
+                <li><a href="mailto:antoniojoseqp@hotmail.com">email: antoniojoseqp@hotmail.com</a></li>
                 <li>phone number: ##########</li>
                 <li>address: $$$$$$$$$$$$$</li>
             </ul>
-        </div>
+        </address>
         <div class="uk-overflow-auto">
             <ul>
                 <h1 class="uk-text-large">Policy</h1>

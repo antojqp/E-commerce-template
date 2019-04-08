@@ -35,7 +35,11 @@
 						echo '<p class="uk-text-small uk-light uk-text-warning">The passwords are not the same</p>';
 					}elseif ($_GET['error'] == "usernametaken") {
 						echo '<p class="uk-text-small uk-light uk-text-warning">The user name is already taken</p>';
+					}elseif ($_GET['error'] == "youarealeadyregistered") {
+						echo '<p class="uk-text-small uk-light uk-text-warning">You are already registered please check your email</p>';
 					}
+				}else{
+					echo '<p class="uk-text-small uk-light uk-text-success">You are now registered please go to the login page</p>';
 				}
 			 ?>
 			<label>Name</label>

@@ -36,6 +36,8 @@ if (isset($_POST[Login])) {
 					#this will check if the password is actually right and it'll redirect to the main page with the data (remeber that the $pwdCheck is a bool but there is always the probability that it can turn into a string thanks to some error so always double check)
 					session_start();
 					$_SESSION['user'] = $row["USERNAME"];
+					$_SESSION['email'] = $row["EMAIL"];
+					$_SESSION['name'] = $row["NAME"];
 					header("Location: ../index.php?yourelogged");
 					exit();
 				}elseif ($pwdCheck == false) {

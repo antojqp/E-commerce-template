@@ -63,8 +63,31 @@
         <ul class="uk-nav uk-navbar-nav">
             <?php 
                 if (isset($_SESSION['user'])) {
-                    echo '<li><a href="user.php" uk-icon="icon: user">' . $_SESSION['user'] . '</a></li>
-                    <li><a href="includes/logout.php" uk-icon="icon: sign-out">Log-out</a></li>';
+                    echo '  <li>
+               <a href="user.php" uk-icon="icon: user">' . $_SESSION['user'] .'</a>
+                <div class="uk-width-xlarge" uk-dropdown>
+                    <div class="uk-dropdown-grid uk-child-width-1-2" uk-grid>
+                        <div class="uk-align-center uk-margin-remove-left">
+                            <ul class="uk-nav uk-dropdown-nav uk-align-center">
+                                <li>Hello! ' . $_SESSION['name'] . '</li>
+                                <li>'. $_SESSION['email'] .'</li>
+                                <br>
+                                <a href="user.php" class="uk-button-small uk-border-rounded uk-button uk-button-secondary">My Account</a>
+                            </ul>
+                        </div>
+                        <div class="uk-divider-vertical uk-height-small">
+                            <ul class="uk-nav uk-dropdown-nav">
+                              <li><a href="#">My shop</a></li>
+                              <li><a href="#">My sells</a></li>
+                              <li><a href="#">My cart</a></li>
+                              <li><a href="#">My settings</a></li>
+                              <li><a href="includes/logout.php">Log-out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><a href="includes/logout.php" uk-icon="icon: sign-out">Log-out</a></li>';
                 }else
                 echo '<li><a href="register.php" uk-icon="icon: user">Register</a></li>
             <li><a href="login.php" uk-icon="icon: sign-in">Login</a></li>';
@@ -97,10 +120,18 @@
                 <hr class="uk-divider-icon">
                 <li><a href="#"><span uk-icon="icon: tag"></span> Stores</a></li>
                 <hr class="uk-divider-icon">
-                <li><a href="#"><span uk-icon="icon: user"></span> Register</a></li>
+                <?php 
+                    if (isset($_SESSION['user'])) {
+                        echo '<li><a href="user.php"><span uk-icon="icon: user"></span>' . $_SESSION['user'] . '</a></li>
+                        <hr class="uk-divider-icon">
+                    <li><a href="includes/logout.php"><span uk-icon="icon: sign-out"></span> Log-out</a></li>';
+                    }else{
+                        echo '<li><a href="#"><span uk-icon="icon: user"></span> Register</a></li>
                 <hr class="uk-divider-icon">
                 <li><a href="login.php"><span uk-icon="sign-in"></span> Login</a></li>
-                <hr class="uk-divider-icon">
+                <hr class="uk-divider-icon">';
+                    }
+                ?>
             </ul>
         </div>
     </li>

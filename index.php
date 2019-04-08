@@ -7,6 +7,9 @@ session_start();
 	<title>ecomex Solutions</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="International E-commerce Platform">
+    <meta name="author" content="Antonio Quintero">
+    <meta name="keywords" content="International,Commerce,E-commerce">
 	<link rel="stylesheet" type="text/css" href="css/uikit.css">
 	<script src="js/uikit.js"></script>
     <script src="js/uikit-icons.js"></script>
