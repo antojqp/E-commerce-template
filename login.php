@@ -1,13 +1,3 @@
-<?php 
-	session_start();
-
-	if (isset($_SESSION['user'])) {
-		#in case they are already login then there is no need to show this page
-
-		header("Location: ../index.php?userlogged");
-		exit();
-	}
-?>
 <!DOCTYPE html>
 <html>
 <head>
